@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard AI Ebook</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                 <img src="cover.jpg" alt="Copertina Ebook AI" class="cover-image">
+                 <h1>Ebook AI</h1>
+            </div>
+
+            <!-- CONTENITORE DELLA RICERCA SPOSTATO QUI -->
+            <div class="search-container">
+                <input type="search" id="search-input" placeholder="Cerca nei capitoli...">
+                <button id="search-button">Cerca</button>
+            </div>
+
+            <!-- CONTENITORE PER I RISULTATI DELLA RICERCA AGGIUNTO QUI -->
+            <div id="search-results-container" class="hidden tool-section"> <!-- Aggiunta classe tool-section per coerenza stile -->
+                <h4>Risultati Ricerca:</h4>
+                <ul id="search-results-list"></ul>
+            </div>
+
+            <div id="table-of-contents">
+                <!-- L'indice verrà generato da JavaScript -->
+            </div>
+            <div class="interactive-tools">
+                <button id="show-glossary">Glossario</button>
+                <button id="show-quiz">Mini-Quiz</button>
+            </div>
+        </aside>
+
+        <main class="content-area">
+            <header>
+                <h2 id="content-title">Benvenuti nella Dashboard Interattiva!</h2>
+            </header>
+            <section id="content-body">
+                <p>Seleziona un capitolo dall'indice a sinistra per studiarne il contenuto.</p>
+                <p>Puoi anche esplorare il Glossario o metterti alla prova con il Mini-Quiz usando i pulsanti qui sotto nell'area dell'indice.</p>
+            </section>
+            
+            <section id="glossary-section" class="hidden tool-section">
+                <h3>Glossario Essenziale AI</h3>
+                <div id="glossary-content">
+                    <!-- Il glossario verrà generato da JavaScript -->
+                </div>
+            </section>
+                        <section id="quiz-section" class="hidden tool-section">
+                <h3>Mini-Quiz sull'AI</h3>
+                
+                <!-- NUOVO SELETTORE CATEGORIA -->
+                <div class="quiz-controls">
+                    <label for="quiz-category-select">Scegli una categoria:</label>
+                    <select id="quiz-category-select">
+                        <option value="all">Tutte le Categorie</option>
+                        <!-- Le opzioni verranno popolate da JavaScript -->
+                    </select>
+                    <button id="restart-quiz-button" class="hidden">Nuovo Quiz (stessa categoria)</button>
+                </div>
+                
+                <div id="quiz-content">
+                    <!-- Il quiz verrà generato da JavaScript -->
+                </div>
+                <button id="next-question" class="hidden">Prossima Domanda</button>
+                <p id="quiz-feedback"></p>
+            </section>
+            
+            <!-- <section id="quiz-section" class="hidden tool-section">
+                <h3>Mini-Quiz sull'AI</h3>
+                <div id="quiz-content">
+                    <!-- Il quiz verrà generato da JavaScript -->
+                </div>
+                <button id="next-question" class="hidden">Prossima Domanda</button>
+                <p id="quiz-feedback"></p>
+            </section>
+        </main>
+    </div>
+
+    <!-- Il search-container è stato spostato DENTRO la sidebar -->
+
+    <script src="script.js"></script>
+</body>
+</html>

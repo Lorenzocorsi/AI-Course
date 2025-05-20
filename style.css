@@ -1,0 +1,468 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Font più moderno e leggibile */
+    margin: 0;
+    background-color: #FFEB3B; /* Giallo principale sfondo pagina */
+    color: #1c1c1c; /* Nero leggermente più morbido per il testo generale */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.dashboard-container {
+    display: flex;
+    width: 95%;
+    max-width: 1400px;
+    height: 90vh; 
+    min-height: 600px; 
+    background-color: #fffacd; 
+    border: 2px solid #000000;
+    box-shadow: 6px 6px 18px rgba(0,0,0,0.25); 
+    overflow: hidden; /* Questo è importante per contenere gli scroll interni */
+    border-radius: 8px; 
+}
+
+.sidebar {
+    /* IMPOSTA UNA LARGHEZZA FISSA O MIN/MAX BENE DEFINITI */
+    width: 320px;       /* Esempio di larghezza fissa, puoi aggiustarla */
+    min-width: 300px;   /* Esempio: impedisce che diventi troppo stretta */
+    flex-shrink: 0;     /* <<-- IMPORTANTE: Impedisce alla sidebar di restringersi */
+    
+    background-color: #FDD835; 
+    /* padding: 0; -- Va bene se l'header e gli tools hanno il loro padding */
+    /* overflow-y: auto; -- Questo era sulla sidebar, ma è meglio averlo sui singoli componenti interni se necessario */
+    border-right: 2px solid #000000;
+    display: flex;
+    flex-direction: column; /* Mantiene l'organizzazione verticale interna */
+    position: relative; /* Può aiutare in alcuni contesti di layout, ma non strettamente necessario qui */
+}
+
+.sidebar-header {
+    padding: 20px 15px;
+    text-align: center;
+    border-bottom: 2px solid #000; 
+    background-color: #FFC107;
+    flex-shrink: 0; /* Impedisce all'header di restringersi */
+}
+
+.cover-image {
+    width: 70%;
+    max-width: 180px;
+    height: auto;
+    border: 2px solid #000;
+    margin-bottom: 15px;
+    border-radius: 6px;
+    box-shadow: 3px 3px 8px rgba(0,0,0,0.2);
+}
+
+.sidebar-header h1 {
+    font-size: 1.6em; /* Titolo ebook più grande */
+    margin: 0;
+    color: #000;
+    font-weight: 600; /* Leggermente più bold */
+}
+
+#table-of-contents {
+    padding: 15px;
+    flex-grow: 1;
+    overflow-y: auto;
+}
+
+#table-of-contents ul {
+    list-style-type: none;
+    padding-left: 0;
+    margin: 0;
+}
+
+#table-of-contents .part-title {
+    font-weight: bold;
+    font-size: 1.15em; /* Titolo parte leggermente più grande */
+    margin-top: 20px;
+    margin-bottom: 8px;
+    color: #424242; /* Grigio scuro per i titoli delle parti */
+    padding-left: 5px;
+    border-bottom: 1px solid #FFC107; /* Leggera linea sotto i titoli delle parti */
+}
+#table-of-contents .part-title:first-child {
+    margin-top: 0;
+}
+
+
+#table-of-contents .chapter-item {
+    padding: 10px 15px; /* Più padding per i capitoli */
+    cursor: pointer;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    transition: background-color 0.2s, color 0.2s;
+    font-size: 0.95em;
+    color: #212121; /* Testo capitolo più scuro */
+}
+
+#table-of-contents .chapter-item:hover {
+    background-color: #FFFDE7; /* Giallo molto chiaro al passaggio del mouse */
+    color: #000;
+}
+
+#table-of-contents .chapter-item.active {
+    background-color: #000000;
+    color: #FFEB3B;
+    font-weight: bold;
+}
+
+.interactive-tools {
+    padding: 20px 15px;
+    border-top: 2px solid #000; /* Bordo più spesso */
+    background-color: #FFC107; /* Stesso sfondo dell'header sidebar */
+}
+
+.interactive-tools button {
+    display: block;
+    width: 100%;
+    padding: 12px; /* Più padding per i bottoni */
+    margin-bottom: 12px;
+    background-color: #000000;
+    color: #FFEB3B;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.05em; /* Testo bottoni leggermente più grande */
+    font-weight: 500;
+    transition: background-color 0.2s;
+}
+.interactive-tools button:last-child {
+    margin-bottom: 0;
+}
+
+.interactive-tools button:hover {
+    background-color: #333333;
+}
+
+.content-area {
+    flex-grow: 1;
+    padding: 30px;
+    overflow-y: auto;
+    background-color: #ffffff; /* Sfondo bianco per l'area contenuti per massima leggibilità */
+    color: #212121; /* Testo principale più scuro */
+}
+
+.content-area header {
+    border-bottom: 2px solid #000000;
+    margin-bottom: 25px;
+    padding-bottom: 10px; /* Spazio sotto il titolo del capitolo */
+}
+
+#content-title {
+    margin-top: 0;
+    font-size: 2em; /* Titolo capitolo più grande */
+    color: #000;
+    font-weight: 600;
+}
+
+/* Stili per il contenuto dell'ebook caricato */
+#content-body p {
+    line-height: 1.75;
+    margin-bottom: 1.2em; /* Spazio tra paragrafi basato sulla dimensione del font */
+    text-align: justify;
+    font-size: 1em; /* Dimensione base per i paragrafi */
+}
+
+#content-body h3 {
+    font-size: 1.5em;
+    color: #1a1a1a;
+    margin-top: 2em;
+    margin-bottom: 0.8em;
+    padding-bottom: 0.3em;
+    border-bottom: 1px solid #e0e0e0; /* Bordo sottotitolo più leggero */
+    font-weight: 600;
+}
+#content-body h4 {
+    font-size: 1.25em;
+    color: #2c2c2c;
+    margin-top: 1.5em;
+    margin-bottom: 0.6em;
+    font-weight: 600;
+}
+
+#content-body ul, #content-body ol {
+    padding-left: 35px;
+    margin-bottom: 1.2em;
+}
+
+#content-body li {
+    margin-bottom: 0.6em;
+    line-height: 1.7;
+}
+
+#content-body strong {
+    font-weight: 600; /* Standard bold */
+    color: #000000; /* Nero per il grassetto per contrasto */
+}
+#content-body em {
+    font-style: italic;
+    color: #333333; /* Grigio scuro per il corsivo */
+}
+#content-body pre {
+    background-color: #f4f4f4; /* Sfondo leggermente più scuro per i blocchi di codice */
+    padding: 1em;
+    border-radius: 6px;
+    overflow-x: auto;
+    border: 1px solid #d1d1d1;
+    font-family: 'Consolas', 'Monaco', 'Courier New', Courier, monospace; /* Font per codice */
+    font-size: 0.9em; /* Testo codice leggermente più piccolo */
+    line-height: 1.6;
+    color: #1c1c1c;
+    margin-top: 1em;
+    margin-bottom: 1.5em;
+}
+#content-body code { /* Stile per codice inline, se lo usi */
+    font-family: 'Consolas', 'Monaco', 'Courier New', Courier, monospace;
+    background-color: #f0f0f0;
+    padding: 0.2em 0.4em;
+    border-radius: 3px;
+    font-size: 0.9em;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.tool-section {
+    margin-top: 25px;
+    padding: 20px;
+    border: 1px solid #bdbdbd; /* Bordo leggermente più scuro */
+    border-radius: 6px;
+    background-color: #FFFDE7; 
+}
+
+.tool-section h3 {
+    margin-top: 0;
+    border-bottom: 1px solid #000;
+    padding-bottom: 8px;
+    font-size: 1.4em;
+}
+
+#glossary-content div {
+    margin-bottom: 12px;
+    line-height: 1.6;
+}
+
+#glossary-content strong {
+    display: block;
+    color: #000;
+    font-weight: 600;
+}
+
+#quiz-content .quiz-question {
+    margin-bottom: 18px;
+    font-size: 1.1em;
+    font-weight: 500;
+}
+
+#quiz-content .quiz-options label {
+    display: block;
+    margin-bottom: 10px;
+    padding: 10px 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+#quiz-content .quiz-options label:hover {
+    background-color: #FFF9C4;
+}
+
+#quiz-content .quiz-options input[type="radio"] {
+    margin-right: 12px;
+    vertical-align: middle;
+}
+
+#quiz-feedback {
+    margin-top: 18px;
+    font-weight: bold;
+    font-size: 1.05em;
+    padding: 8px;
+    border-radius: 4px;
+}
+#quiz-feedback.correct { /* Aggiunta classe per feedback corretto */
+    color: #2e7d32; /* Verde scuro */
+    background-color: #e8f5e9; /* Verde molto chiaro */
+    border: 1px solid #a5d6a7;
+}
+#quiz-feedback.incorrect { /* Aggiunta classe per feedback sbagliato */
+    color: #c62828; /* Rosso scuro */
+    background-color: #ffebee; /* Rosso molto chiaro */
+    border: 1px solid #ef9a9a;
+}
+
+
+#next-question {
+    margin-top: 20px;
+    padding: 10px 18px;
+    background-color: #000000;
+    color: #FFEB3B;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: 500;
+}
+
+#next-question:hover {
+    background-color: #333333;
+}
+
+/* Scrollbar personalizzata (Webkit) */
+::-webkit-scrollbar {
+    width: 10px; /* Leggermente più spessa */
+    height: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #FFFDE7; /* Sfondo della traccia */
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #FDD835; /* Colore del "pollice" della scrollbar */
+    border-radius: 5px;
+    border: 1px solid #FFC107; /* Bordo per il pollice */
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #FFC107; /* Giallo più scuro per hover thumb */
+}
+
+/* Scrollbar personalizzata (Firefox) - più limitata */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #FDD835 #FFFDE7; /* thumb track */
+}
+
+/* Stili per i controlli del Quiz */
+.quiz-controls {
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 15px; /* Spazio tra label, select e bottone */
+    flex-wrap: wrap; /* Permette di andare a capo su schermi piccoli */
+}
+
+.quiz-controls label {
+    font-weight: 500;
+}
+
+#quiz-category-select {
+    padding: 8px 10px;
+    border: 1px solid #000;
+    border-radius: 4px;
+    background-color: #fff;
+    font-size: 0.95em;
+    min-width: 180px; /* Larghezza minima */
+}
+
+#restart-quiz-button {
+    padding: 8px 12px;
+    background-color: #000; /* Un colore diverso, es. verde */
+    color: #FFEB3B;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9em;
+}
+#restart-quiz-button:hover {
+    background-color: #45a049;
+}
+#restart-quiz-button.hidden { /* Per coerenza con next-question */
+    display: none !important;
+}
+
+/* ... (tutti gli stili precedenti) ... */
+
+/* Modifica o alternativa alla classe .hidden per le sezioni principali di contenuto */
+.content-section { /* Aggiungeremo questa classe agli elementi che devono transire */
+    opacity: 1;
+    visibility: visible;
+    max-height: 4000px; /* Un valore molto alto per permettere l'animazione dell'altezza */
+    overflow: hidden; /* Necessario per l'animazione di max-height */
+    transition: opacity 0.4s ease-in-out, max-height 0.5s ease-in-out, visibility 0s linear 0s;
+    /* Il ritardo su visibility è per assicurare che non blocchi l'opacità */
+}
+
+.content-section.is-hidden { /* Nuova classe per nascondere con transizione */
+    opacity: 0;
+    visibility: hidden;
+    max-height: 0;
+    transition: opacity 0.3s ease-in-out, max-height 0.4s ease-in-out, visibility 0s linear 0.4s;
+    /* Visibility cambia dopo che l'opacità è a zero */
+}
+
+
+/* Applichiamo la classe base .content-section e la .is-hidden inizialmente dove serve */
+/* In index.html, questi elementi dovrebbero avere class="content-section is-hidden tool-section" */
+/* #glossary-section, #quiz-section */
+/* e #search-results-container dovrebbe avere class="content-section is-hidden" (o anche tool-section se vuoi lo stesso padding) */
+
+/* Per #content-body, lo gestiamo diversamente perché è sempre visibile se non c'è un tool attivo */
+#content-body {
+    /* Rimuoviamo la transizione diretta da qui, la gestiamo con le classi sopra se necessario,
+       ma solitamente #content-body è il default visibile.
+       Se vogliamo animare il cambio di contenuto AL SUO INTERNO, è più complesso e
+       potrebbe richiedere di svuotarlo, impostare opacità a 0, riempirlo, e poi opacità a 1.
+       Per ora, concentriamoci sulla comparsa/scomparsa delle SEZIONI (glossario, quiz).
+    */
+    line-height: 1.75;
+    margin-bottom: 1.2em;
+    text-align: justify;
+    font-size: 1em;
+}
+
+
+/* Transizione per l'elemento attivo nell'indice */
+#table-of-contents .chapter-item {
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    font-size: 0.95em;
+    color: #212121;
+    /* Transizione aggiunta qui */
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out, transform 0.2s ease-out;
+}
+
+#table-of-contents .chapter-item:hover {
+    background-color: #FFFDE7;
+    color: #000;
+    transform: translateX(3px); /* Leggero spostamento al hover */
+}
+
+#table-of-contents .chapter-item.active {
+    background-color: #000000;
+    color: #FFEB3B;
+    font-weight: bold;
+    transform: translateX(5px); /* Spostamento maggiore per l'attivo */
+}
+
+/* Potremmo aggiungere una transizione al titolo del capitolo quando cambia */
+#content-title {
+    margin-top: 0;
+    font-size: 2em;
+    color: #000;
+    font-weight: 600;
+    transition: opacity 0.3s ease-in-out; /* Semplice dissolvenza */
+}
+
+
+/* Stili per i risultati della ricerca, ora usa .content-section e .is-hidden */
+#search-results-container {
+    /* Rimuoviamo max-height da qui, sarà gestito da .content-section */
+    padding: 10px 15px; /* Manteniamo il padding se non si usa tool-section */
+    /* overflow-y: auto; (gestito da .content-section se max-height è grande) */
+    border-bottom: 1px solid #ccc;
+}
+
+/* Rimuoviamo la vecchia .hidden se non più usata globalmente, o la teniamo per altri usi */
+/* .hidden {
+    display: none !important;
+} */
